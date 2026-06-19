@@ -1,0 +1,20 @@
+name: dailyflowlabs-site
+region: nyc
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+domains:
+- domain: dailyflowlabs.com
+  type: PRIMARY
+  zone: dailyflowlabs.com
+- domain: www.dailyflowlabs.com
+  type: ALIAS
+  zone: dailyflowlabs.com
+static_sites:
+- name: dailyflowlabs-static
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: domusdash/dailyflowlabs # UPDATE THIS to your actual GitHub repository string (e.g. your-username/repo-name)
+  source_dir: /
+  output_dir: /

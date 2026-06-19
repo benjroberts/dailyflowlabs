@@ -360,7 +360,16 @@
           </div>
         </div>
         
-        <form class="contact-form" id="contactForm" action="#" method="POST">
+        <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Web3Forms Access Key (Get a free key from web3forms.com) -->
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" id="web3FormsKey">
+          
+          <!-- Spam Protection: Honeypot (hidden from human users, bots will fill it) -->
+          <input type="checkbox" name="botcheck" class="hidden-field" style="display: none;">
+          
+          <input type="hidden" name="from_name" value="Daily Flow Labs Inquiries">
+          <input type="hidden" name="subject" value="New Inquiry from dailyflowlabs.com">
+          
           <div class="form-success-msg" id="successMsg">
             Your inquiry has been successfully sent! We will contact you soon.
           </div>

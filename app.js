@@ -130,6 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       
+      const keyInput = document.getElementById('web3FormsKey');
+      const isPlaceholder = !keyInput || keyInput.value === 'YOUR_ACCESS_KEY_HERE' || keyInput.value.trim() === '';
+      
       // Disable inputs and button, show sending state
       submitBtn.disabled = true;
       const originalBtnHtml = submitBtn.innerHTML;
@@ -143,10 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.head.appendChild(style);
       }
       
-      // Simulate network request (1.5 seconds)
-      setTimeout(() => {
-        // Hide button contents, show success message
+      const handleSuccess = () => {
+        // Success state
         successMsg.style.display = 'block';
+        successMsg.textContent = 'Your inquiry has been successfully sent! We will contact you soon.';
+        successMsg.style.borderColor = 'rgba(16, 185, 129, 0.2)';
+        successMsg.style.color = '#10b981';
+        successMsg.style.background = 'rgba(16, 185, 129, 0.08)';
         contactForm.reset();
         
         // Reset button state
@@ -160,7 +166,50 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           successMsg.style.display = 'none';
         }, 7000);
-      }, 1500);
+      };
+      
+      const handleError = (message) => {
+        // Error state
+        successMsg.style.display = 'block';
+        successMsg.textContent = message || 'Something went wrong. Please try again later or email us directly.';
+        successMsg.style.borderColor = 'rgba(239, 68, 68, 0.2)';
+        successMsg.style.color = '#ef4444';
+        successMsg.style.background = 'rgba(239, 68, 68, 0.08)';
+        
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
+        
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      };
+      
+      if (isPlaceholder) {
+        // Fallback simulator for previewing/local development
+        console.warn("Web3Forms access key is not set. Simulating form submission.");
+        setTimeout(handleSuccess, 1500);
+      } else {
+        // Actual HTTP POST submission
+        const formData = new FormData(contactForm);
+        
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json'
+          },
+          body: formData
+        })
+        .then(async (response) => {
+          const json = await response.json();
+          if (response.status === 200) {
+            handleSuccess();
+          } else {
+            handleError(json.message);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          handleError('Failed to send message. Please check your connection and try again.');
+        });
+      }
     });
   }
 });

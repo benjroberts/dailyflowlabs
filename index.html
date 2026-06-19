@@ -82,10 +82,10 @@
     <section class="section container native-reveal reveal" id="about">
       <div class="about-grid">
         <div>
-          <span class="section-tag">The Studio</span>
-          <h2 class="section-title">Harmonizing Routine</h2>
-          <p class="about-feature-desc" style="margin-bottom: 24px;">
-            At Daily Flow Labs, we believe your software should work with you, not collect from you. Our tools are designed from the ground up to solve personal utilities without the bulk of modern trackers or tracking-driven monetization.
+          <span class="section-tag">Our Studio</span>
+          <h2 class="section-title">Simple Apps for Everyday Life</h2>
+          <p class="about-feature-desc" style="margin-bottom: 24px; font-size: 1.15rem; line-height: 1.7;">
+            We build focused, user-friendly tools designed to make your day run smoother. Whether you are keeping your family on the same page with calendars and grocery lists, or tracking your workouts and health habits at the gym—our apps are built to get out of your way and help you focus on what matters.
           </p>
           <div class="about-features">
             <div class="about-feature">
@@ -93,38 +93,45 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <div>
-                <h3 class="about-feature-title">End-to-End Cryptography</h3>
-                <p class="about-feature-desc">Your sensitive document vaults and workout vitals are encrypted on-device. We never see your data.</p>
+                <h3 class="about-feature-title">Built with True Privacy</h3>
+                <p class="about-feature-desc">Your calendars, budgets, and workouts belong to you. We store your information safely on your own device and never sell it to advertisers or brokers.</p>
               </div>
             </div>
             <div class="about-feature">
               <div class="about-feature-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
               </div>
               <div>
-                <h3 class="about-feature-title">Local-First Architecture</h3>
-                <p class="about-feature-desc">Apps load instantly and function offline. Data is stored in secure local structures and synced seamlessly.</p>
+                <h3 class="about-feature-title">Lightning Fast & Works Offline</h3>
+                <p class="about-feature-desc">No loading spinners or sluggish network delays. Our apps open instantly and function without a cell signal, wherever you are.</p>
               </div>
             </div>
           </div>
         </div>
         
         <div class="about-visual">
-          <div class="code-block">
-            <div class="code-line"><span class="code-comment">// Connecting to the local database securely...</span></div>
-            <div class="code-line"><span class="code-keyword">const</span> db = <span class="code-keyword">await</span> LocalDB.<span class="code-fn">initialize</span>({</div>
-            <div class="code-line">&nbsp;&nbsp;name: <span class="code-string">"dailyflow_vault"</span>,</div>
-            <div class="code-line">&nbsp;&nbsp;encryption: <span class="code-string">"AES-256-GCM"</span>,</div>
-            <div class="code-line">&nbsp;&nbsp;offlineFirst: <span class="code-keyword">true</span></div>
-            <div class="code-line">});</div>
-            <div class="code-line"></div>
-            <div class="code-line"><span class="code-comment">// Syncing with cloud endpoints (Zero-Knowledge)</span></div>
-            <div class="code-line"><span class="code-keyword">const</span> sync = <span class="code-keyword">await</span> db.<span class="code-fn">syncToCloud</span>({</div>
-            <div class="code-line">&nbsp;&nbsp;endpoint: <span class="code-string">"https://api.dailyflowlabs.com/sync"</span>,</div>
-            <div class="code-line">&nbsp;&nbsp;encryptPayload: <span class="code-keyword">true</span></div>
-            <div class="code-line">});</div>
-            <div class="code-line"></div>
-            <div class="code-line"><span class="code-fn">console</span>.<span class="code-fn">log</span>(<span class="code-string">"Sync Status: Secure and Flowing ✔"</span>);</div>
+          <div class="about-visual-container">
+            <!-- Left bubble (Family) -->
+            <div class="about-bubble about-bubble-domus">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, var(--accent-domus), #f97316); display: grid; place-items: center; color: white;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 0.95rem; color: #fff; margin-bottom: 2px;">DomusDash</div>
+                <div style="font-size: 0.72rem; color: var(--text-secondary);">Family Organizer</div>
+              </div>
+            </div>
+            
+            <!-- Right bubble (Workouts) -->
+            <div class="about-bubble about-bubble-iron">
+              <div style="width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, var(--accent-iron), #0284c7); display: grid; place-items: center; color: white;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 0.95rem; color: #fff; margin-bottom: 2px;">IronDial</div>
+                <div style="font-size: 0.72rem; color: var(--text-secondary);">Workout Metrics</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -277,10 +284,10 @@
           <span class="section-tag">Core Beliefs</span>
           <h2 class="philosophy-title">Why We Build Differently</h2>
           <p class="philosophy-text">
-            Software should be a calm, quiet utility that runs smoothly without begging for attention. We write robust code, reject analytics-heavy SDKs, and build local-first applications so your metrics are preserved right where they belong: on your device.
+            Software should be a calm, quiet tool that runs smoothly without begging for your attention. We write clean, direct code and build apps that run right on your phone, keeping your metrics and schedules preserved exactly where they belong: in your hands.
           </p>
           <p class="philosophy-text">
-            Our products never sell your data, display programmatic advertisements, or lock your logs into closed formats.
+            Our products never sell your data, display annoying pop-up ads, or lock your history into closed formats.
           </p>
         </div>
         <div class="philosophy-pillars">
@@ -289,8 +296,8 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 5a5 5 0 0 0-5 5 5 5 0 0 0 10 0 5 5 0 0 0-5-5z"/></svg>
             </div>
             <div>
-              <h3 class="pillar-name">Zero-Knowledge Vaults</h3>
-              <p class="pillar-desc">Sensitive files and budgets are stored with keys derived only from your password. No servers can unlock it.</p>
+              <h3 class="pillar-name">Your Data Stays Yours</h3>
+              <p class="pillar-desc">Your private vaults, calendars, and health numbers are encrypted on your phone. We can never see or unlock them.</p>
             </div>
           </div>
           <div class="pillar-item">
@@ -298,8 +305,8 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             </div>
             <div>
-              <h3 class="pillar-name">Sub-Millisecond Speeds</h3>
-              <p class="pillar-desc">Offline access ensures near-instantaneous page load and set-logging times. Never wait for an API request mid-lift.</p>
+              <h3 class="pillar-name">Instant Response</h3>
+              <p class="pillar-desc">Everything runs directly on your device. Never wait for an API request or loading screen mid-workout or while grocery shopping.</p>
             </div>
           </div>
         </div>

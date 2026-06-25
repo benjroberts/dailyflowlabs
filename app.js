@@ -116,6 +116,180 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- ThumbVerify Card Hover Micro-Interactions ---
+  const thumbCard = document.querySelector('.product-card-thumbverify');
+  const dropzone = document.getElementById('thumbverify-dropzone');
+  const tvRows = [
+    document.getElementById('tv-row-1'),
+    document.getElementById('tv-row-2'),
+    document.getElementById('tv-row-3')
+  ];
+  let thumbTimeouts = [];
+
+  if (thumbCard && dropzone) {
+    thumbCard.addEventListener('mouseenter', () => {
+      dropzone.classList.add('thumbverify-dropzone-active');
+      const title = dropzone.querySelector('.thumbverify-status-title');
+      const desc = dropzone.querySelector('.thumbverify-status-desc');
+      
+      if (title) title.textContent = 'Scanning...';
+      if (desc) desc.textContent = 'Calculating hash';
+
+      // Reset rows first
+      tvRows.forEach(row => {
+        if (row) row.classList.remove('active');
+      });
+
+      // Stagger activation
+      thumbTimeouts.push(setTimeout(() => {
+        if (tvRows[0]) tvRows[0].classList.add('active');
+        if (desc) desc.textContent = 'Reading EXIF';
+      }, 400));
+
+      thumbTimeouts.push(setTimeout(() => {
+        if (tvRows[1]) tvRows[1].classList.add('active');
+        if (desc) desc.textContent = 'Validating checksum';
+      }, 900));
+
+      thumbTimeouts.push(setTimeout(() => {
+        if (tvRows[2]) tvRows[2].classList.add('active');
+        if (title) title.textContent = 'Valid file';
+        if (desc) desc.textContent = 'SHA-256 Verified';
+      }, 1400));
+    });
+
+    thumbCard.addEventListener('mouseleave', () => {
+      // Clear timeouts
+      thumbTimeouts.forEach(t => clearTimeout(t));
+      thumbTimeouts = [];
+
+      // Revert classes & text
+      dropzone.classList.remove('thumbverify-dropzone-active');
+      const title = dropzone.querySelector('.thumbverify-status-title');
+      const desc = dropzone.querySelector('.thumbverify-status-desc');
+      if (title) title.textContent = 'Drop File Here';
+      if (desc) desc.textContent = 'Click or drag image';
+
+      tvRows.forEach(row => {
+        if (row) row.classList.remove('active');
+      });
+    });
+  }
+
+  // --- LocalRedactPDF Card Hover Micro-Interactions ---
+  const redactCard = document.querySelector('.product-card-redact');
+  const redactSwitches = [
+    document.getElementById('redact-switch-ssn'),
+    document.getElementById('redact-switch-email'),
+    document.getElementById('redact-switch-meta')
+  ];
+  const redactBars = [
+    document.getElementById('redact-bar-1'),
+    document.getElementById('redact-bar-2')
+  ];
+  let redactTimeouts = [];
+
+  if (redactCard) {
+    redactCard.addEventListener('mouseenter', () => {
+      // Clear switches and bars
+      redactSwitches.forEach(sw => sw && sw.classList.remove('redact-switch-active'));
+      redactBars.forEach(bar => bar && bar.classList.remove('redacted'));
+
+      // Sequence
+      redactTimeouts.push(setTimeout(() => {
+        if (redactSwitches[0]) redactSwitches[0].classList.add('redact-switch-active');
+        if (redactBars[0]) redactBars[0].classList.add('redacted');
+      }, 300));
+
+      redactTimeouts.push(setTimeout(() => {
+        if (redactSwitches[1]) redactSwitches[1].classList.add('redact-switch-active');
+        if (redactBars[1]) redactBars[1].classList.add('redacted');
+      }, 800));
+
+      redactTimeouts.push(setTimeout(() => {
+        if (redactSwitches[2]) redactSwitches[2].classList.add('redact-switch-active');
+      }, 1300));
+    });
+
+    redactCard.addEventListener('mouseleave', () => {
+      redactTimeouts.forEach(t => clearTimeout(t));
+      redactTimeouts = [];
+      redactSwitches.forEach(sw => sw && sw.classList.remove('redact-switch-active'));
+      redactBars.forEach(bar => bar && bar.classList.remove('redacted'));
+    });
+  }
+
+  // --- ShortCodeIcons Card Hover Micro-Interactions ---
+  const iconsCard = document.querySelector('.product-card-icons');
+  const iconItems = [
+    document.getElementById('icon-item-1'),
+    document.getElementById('icon-item-2'),
+    document.getElementById('icon-item-3'),
+    document.getElementById('icon-item-4')
+  ];
+  const codeContent = document.getElementById('icons-code-content');
+  const copyStatus = document.getElementById('icons-copy-status');
+  let iconsCycleInterval = null;
+  let copyStatusTimeout = null;
+
+  const iconData = [
+    { name: 'home', code: '<Icon name="home" />' },
+    { name: 'plus', code: '<Icon name="plus" />' },
+    { name: 'edit', code: '<Icon name="edit" />' },
+    { name: 'settings', code: '<Icon name="settings" />' }
+  ];
+
+  if (iconsCard && codeContent && copyStatus) {
+    let currentIconIdx = 0;
+
+    iconsCard.addEventListener('mouseenter', () => {
+      // Start cycling
+      iconsCycleInterval = setInterval(() => {
+        // Remove active class
+        iconItems.forEach(item => item && item.classList.remove('icons-grid-item-active'));
+        
+        currentIconIdx = (currentIconIdx + 1) % iconData.length;
+        
+        const currentItem = iconItems[currentIconIdx];
+        if (currentItem) currentItem.classList.add('icons-grid-item-active');
+        
+        codeContent.textContent = iconData[currentIconIdx].code;
+
+        // Playful copy flash
+        if (currentIconIdx === 2) {
+          copyStatus.textContent = 'Copied!';
+          copyStatus.style.color = '#10b981';
+          copyStatus.style.background = 'rgba(16, 185, 129, 0.15)';
+          
+          if (copyStatusTimeout) clearTimeout(copyStatusTimeout);
+          copyStatusTimeout = setTimeout(() => {
+            copyStatus.textContent = 'Copy';
+            copyStatus.style.color = 'var(--text-muted)';
+            copyStatus.style.background = 'rgba(255, 255, 255, 0.05)';
+          }, 600);
+        }
+      }, 900);
+    });
+
+    iconsCard.addEventListener('mouseleave', () => {
+      if (iconsCycleInterval) clearInterval(iconsCycleInterval);
+      if (copyStatusTimeout) clearTimeout(copyStatusTimeout);
+      
+      // Revert to first active state
+      iconItems.forEach((item, idx) => {
+        if (item) {
+          if (idx === 0) item.classList.add('icons-grid-item-active');
+          else item.classList.remove('icons-grid-item-active');
+        }
+      });
+      codeContent.textContent = iconData[0].code;
+      copyStatus.textContent = 'Copy';
+      copyStatus.style.color = 'var(--text-muted)';
+      copyStatus.style.background = 'rgba(255, 255, 255, 0.05)';
+      currentIconIdx = 0;
+    });
+  }
+
   // --- 4. Contact Form Handler (Simulated Submit with Success Feedback) ---
   const contactForm = document.getElementById('contactForm');
   const submitBtn = document.getElementById('submitBtn');

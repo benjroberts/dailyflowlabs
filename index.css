@@ -1164,6 +1164,107 @@ header {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* --- Newsletter Section --- */
+.newsletter-section {
+  border-top: 1px solid var(--border-color);
+  padding: 80px 24px;
+  background: #08080a;
+}
+
+.newsletter-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletter-header h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.newsletter-header p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+}
+
+.newsletter-input-group {
+  display: flex;
+  width: 100%;
+  max-width: 460px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  padding: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.newsletter-input-group:focus-within {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.newsletter-input-group input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 8px 18px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.newsletter-input-group input::placeholder {
+  color: var(--text-muted);
+}
+
+.newsletter-input-group button {
+  background: var(--text-primary);
+  color: #000;
+  border: none;
+  padding: 8px 24px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.newsletter-input-group button:hover {
+  opacity: 0.9;
+}
+
+.newsletter-input-group button:disabled {
+  background: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.newsletter-message {
+  margin-top: 16px;
+  font-size: 0.88rem;
+  min-height: 1.25rem;
+}
+
+.newsletter-message.success {
+  color: #4ade80;
+}
+
+.newsletter-message.error {
+  color: #f87171;
+}
+
 /* --- Footer --- */
 footer {
   border-top: 1px solid var(--border-color);

@@ -653,6 +653,30 @@
     </section>
   </main>
 
+  <!-- Newsletter Section -->
+  <section class="newsletter-section" id="newsletter">
+    <div class="newsletter-container">
+      <div class="newsletter-header">
+        <h2>Subscribe to updates</h2>
+        <p>Stay updated with our latest products, engineering thoughts, and lab experiments.</p>
+      </div>
+      <form id="newsletter-form" class="newsletter-form">
+        <!-- Honeypot -->
+        <div style="display: none;" aria-hidden="true">
+          <input type="text" name="website" id="newsletter-website" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="newsletter-input-group">
+          <input type="email" id="newsletter-email" placeholder="Enter your email address" required autocomplete="email">
+          <button type="submit" id="newsletter-submit">
+            Subscribe
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left: 6px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </form>
+      <div id="newsletter-message" class="newsletter-message"></div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
     <div class="footer-container">

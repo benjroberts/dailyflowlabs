@@ -386,4 +386,71 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // --- 5. Newsletter Form Handler ---
+  const newsletterForm = document.getElementById('newsletter-form');
+  const newsletterEmail = document.getElementById('newsletter-email');
+  const newsletterWebsite = document.getElementById('newsletter-website');
+  const newsletterSubmit = document.getElementById('newsletter-submit');
+  const newsletterMsg = document.getElementById('newsletter-message');
+
+  if (newsletterForm && newsletterEmail && newsletterSubmit && newsletterMsg) {
+    newsletterForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = newsletterEmail.value.trim();
+      const website = newsletterWebsite.value.trim();
+      
+      newsletterMsg.textContent = '';
+      newsletterMsg.className = 'newsletter-message';
+      newsletterSubmit.disabled = true;
+      const originalSubmitText = newsletterSubmit.innerHTML;
+      newsletterSubmit.innerHTML = 'Subscribing...';
+
+      // Honeypot check
+      if (website) {
+        setTimeout(() => {
+          newsletterMsg.textContent = 'Thanks! Check your email to confirm.';
+          newsletterMsg.className = 'newsletter-message success';
+          newsletterEmail.value = '';
+          newsletterWebsite.value = '';
+          newsletterSubmit.disabled = false;
+          newsletterSubmit.innerHTML = originalSubmitText;
+        }, 1200);
+        return;
+      }
+
+      try {
+        const response = await fetch('https://marketing.dailyflowlabs.com/api/marketing/public/newsletter-signup/daily-flow-labs', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email,
+            source: 'landing-page',
+            website: website
+          })
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (response.ok) {
+          newsletterMsg.textContent = 'Thanks! Check your email to confirm.';
+          newsletterMsg.className = 'newsletter-message success';
+          newsletterEmail.value = '';
+        } else {
+          newsletterMsg.textContent = data.error || 'Something went wrong. Please try again.';
+          newsletterMsg.className = 'newsletter-message error';
+        }
+      } catch (err) {
+        console.error(err);
+        newsletterMsg.textContent = 'Failed to connect. Please check your network connection.';
+        newsletterMsg.className = 'newsletter-message error';
+      } finally {
+        newsletterSubmit.disabled = false;
+        newsletterSubmit.innerHTML = originalSubmitText;
+      }
+    });
+  }
 });
